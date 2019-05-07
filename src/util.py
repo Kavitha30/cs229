@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import threading
+from constants import NUM_WORKERS
 import csv
 import constants as c
 
@@ -80,3 +82,44 @@ def load_raw_data():
 
     frame = pd.concat(li, axis=0, ignore_index=True, sort=False)
     frame.to_pickle(c.DATA_DIR + 'full_data.pkl')
+
+def process_threaded(call, args_list, print_every=100):
+
+    def thread_target():
+        global c
+        global num_done
+        while True:
+            c.acquire()
+            remaining = len(args_list)
+            if remaining == 0:
+                num_done += 1
+                if num_done == NUM_WORKERS:
+                    c.notify_all()
+                c.release()
+                return
+
+            args = args_list.pop()
+            c.release()
+            idx, result = call(*args)
+            results[idx] = result
+
+    global c
+    c = threading.Condition()
+    c.acquire()
+
+    # Start and join threads
+    threads = [threading.Thread(target=thread_target) for _ in range(NUM_WORKERS)]
+
+    global num_done
+    num_done = 0
+
+    global results
+    results = {}
+
+    for t_id, t in enumerate(threads):
+        t.start()
+    c.wait()
+    c.release()
+    for t_id, t in enumerate(threads):
+        threads[t_id].join()
+    return results
