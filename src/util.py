@@ -13,31 +13,37 @@ def cat_to_array(df, category):
     category of the given variable.
     '''
     data_rows = df.shape[0]
+    first_index = df.first_valid_index()
     indicator_columns = np.zeros((data_rows, 1))
-    categories = {df.at[0, category]: 0}
-    names = [category + '_' + df.at[0, category]]
+    categories = {df.at[first_index, category]: 0}
+    names = [category + '_' + df.at[first_index, category]]
     print('on row ...')
+    i = 0
     for index, row in df.iterrows():
-        if index%50000 == 0:
-             print(index)
+        if i%100000 == 0:
+             print(i)
         if row[category] not in categories:
             names.append(category + '_' + row[category])
             categories[row[category]] = indicator_columns.shape[1]
             indicator_columns = np.concatenate((indicator_columns, np.zeros((data_rows, 1))), axis=1)
-        indicator_columns[index, categories[row[category]]] = 1
-    return pd.DataFrame(indicator_columns, columns = names)
+        indicator_columns[i, categories[row[category]]] = 1
+        i +=  1
+    result = pd.DataFrame(indicator_columns, index = df.index.values ,columns = names)
+    return result
 
 def binary_encode(df, category):
     data_rows = df.shape[0]
+    first_index = df.first_valid_index()
     numbers = [1]
     indicator_columns = np.zeros((data_rows, 1))
-    categories = {df.at[0, category]: to_rev_binary(numbers[0])}
+    categories = {df.at[first_index, category]: to_rev_binary(numbers[0])}
     names = [category + '_Bin_0']
     columns = 1
     print('on row ... ')
+    i = 1
     for index, row in df.iterrows():
-        if index % 50000 == 0:
-            print(index)
+        if i % 100000 == 0:
+            print(i)
         if row[category] not in categories:
             if(np.mean(to_rev_binary(numbers[-1])==0) == 0):
                 indicator_columns = np.concatenate((indicator_columns, np.zeros((data_rows, 1))), axis=1)
@@ -48,8 +54,8 @@ def binary_encode(df, category):
             new_encoding = to_rev_binary(numbers[-1] + 1)
             categories[row[category]] = new_encoding
             numbers.append(numbers[-1] + 1)
-        indicator_columns[index] = categories[row[category]]
-    return pd.DataFrame(indicator_columns, columns=names)
+        indicator_columns[i] = categories[row[category]]
+    return pd.DataFrame(indicator_columns, index = df.index.values, columns=names)
 
 def to_rev_binary(n):
     s = "{0:b}".format(n)
@@ -82,6 +88,8 @@ def load_raw_data():
 
     frame = pd.concat(li, axis=0, ignore_index=True, sort=False)
     frame.to_pickle(c.DATA_DIR + 'full_data.pkl')
+
+
 
 def process_threaded(call, args_list, print_every=100):
 
