@@ -29,7 +29,6 @@ GENERATE_STATE_GDP = True
 CATEGORY_ENCODING = True
 
 SPLIT_BY_YEAR = True
-
 sample = False
 
 def main():
@@ -39,6 +38,7 @@ def main():
 
     if(os.path.isfile(c.DATA_DIR + 'full_data.pkl')):
         dataset = pd.read_pickle(c.DATA_DIR + 'full_data.pkl')
+        #dataset = dataset.tail(10000)
     else:
         dataset = util.load_raw_data()
 
@@ -55,11 +55,17 @@ def main():
     if SPLIT_BY_YEAR:
         print('Splitting data by year')
         dataset = split_by_year.main(dataset)
-        print(dataset)
-        # TODO: drop original categories (category columns are in constants.py)
-        # TODO: Convert loan_status to label column (Current = still active, all other categories left as is: ChargeOff, Grace Period, Late, Paid in full, etc.)
-        # TODO: Maybe drop all rows for 2019, (data only goes through february)
-        dataset.to_pickle(c.DATA_DIR + 'full_data_clean.pkl')
+        #ignoring years 2019 since we don't have the data
+        dataset = dataset[dataset.year!= 2019.0]
+        #dropping original categorial variables
+        dataset = dataset.drop(columns=['sub_grade', 'verification_status', 'pymnt_plan', 'purpose', 'initial_list_status',
+            'application_type','addr_state', 'home_ownership'])
+        #encoding classification
+        #print(dataset['loan_status'].unique())
+        dataset.loan_status = dataset.loan_status.replace({"Current": "0", "Fully Paid":"0","Late (31-120 days)":"0",
+                                                   "Default": "1", "Charged Off": "1"})
+        #print(dataset['loan_status'].unique())
+        dataset.to_csv(path_or_buf='/Users/ahn 1/Desktop/CS229/cs229/data/complete_dataset.txt',sep="\t",encoding='utf-8',index=False)
 
 
     if GENERATE_EXPANSION:
