@@ -38,7 +38,7 @@ def main():
 
     if(os.path.isfile(c.DATA_DIR + 'full_data.pkl')):
         dataset = pd.read_pickle(c.DATA_DIR + 'full_data.pkl')
-        #dataset = dataset.tail(10000)
+        #dataset = dataset.tail(100000)
     else:
         dataset = util.load_raw_data()
 
@@ -63,7 +63,10 @@ def main():
         #encoding classification
         #print(dataset['loan_status'].unique())
         dataset.loan_status = dataset.loan_status.replace({"Current": "0", "Fully Paid":"0","Late (31-120 days)":"0",
-                                                   "Default": "1", "Charged Off": "1"})
+                                                   "Default": "1", "Charged Off": "1", "In Grace Period": "0", "Late (31-120 days)":"0",
+                                                   "Does not meet the credit policy. Status:Fully Paid": "0", 
+                                                   "Does not meet the credit policy. Status:Charged Off":"0",
+                                                   "Late (16-30 days)":"0"})
         #print(dataset['loan_status'].unique())
         dataset.to_csv(path_or_buf='/Users/ahn 1/Desktop/CS229/cs229/data/complete_dataset.txt',sep="\t",encoding='utf-8',index=False)
 
