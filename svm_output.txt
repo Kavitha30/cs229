@@ -1,0 +1,23 @@
+   Unnamed: 0  acc_now_delinq  ...  verification_status_Verified    year
+0     4201079               0  ...                           0.0  2015.0
+1      481104               0  ...                           1.0  2018.0
+2     3762764               0  ...                           0.0  2013.0
+3     2922260               0  ...                           1.0  2018.0
+4     5071953               0  ...                           0.0  2018.0
+
+[5 rows x 183 columns]
+hio
+Accuracy_test is 0.9520354089491375
+Accuracy_train is 0.9518851554868057
+spec_test is 0.952042135735937
+spec_train is 0.9518952396153436
+sens_test is 0.0
+sens_train is 0.4444444444444444
+test accuracy score is 0.9520354089491375
+train accuracy score is 0.9518851554868057
+test confusion matrix is [[943191      7]
+ [ 47512      0]]
+train confusion matrix is [[3017704      35]
+ [ 152502      28]]
+test AUC score is 0.499996289220291
+train AUC score is 0.5000859861789906
