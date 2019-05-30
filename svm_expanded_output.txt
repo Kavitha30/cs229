@@ -1,0 +1,14 @@
+Accuracy_test is 0.9520424745889312
+Accuracy_train is 0.951892094961027
+spec_test is 0.9520424745889312
+spec_train is 0.9518918673393362
+sens_test is nan
+sens_train is 1.0
+test accuracy score is 0.9520424745889312
+train accuracy score is 0.951892094961027
+test confusion matrix is [[943198      0]
+ [ 47512      0]]
+train confusion matrix is [[3017739       0]
+ [ 152515      15]]
+test AUC score is 0.5
+train AUC score is 0.5000491706549531

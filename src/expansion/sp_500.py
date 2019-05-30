@@ -12,11 +12,6 @@ def generate(years):
     '''
     print("Generating sp500 pickle")
     df = pd.read_csv(c.DATA_DIR + 'supplementary_data/sp-500-historical-annual-returns.csv')
-    print(df)
-    for _,row in df.iterrows():
-        print(row)
-        print(row['date'])
-        print(row[1])
     annual_return = { str(datetime.strptime(row['date'], "%m/%d/%y").date().year): row[1] for _, row in df.iterrows() }
     year_to_SP500 = {}
     for year in years:

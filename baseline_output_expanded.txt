@@ -1,0 +1,34 @@
+Unbalanced
+
+Accuracy_test is 0.9520273339322304
+Accuracy_train is 0.951875692567413
+spec_test is 0.9520490491874765
+spec_train is 0.9518962098514715
+sens_test is 0.25806451612903225
+sens_train is 0.32038834951456313
+test accuracy score is 0.9520273339322304
+train accuracy score is 0.951875692567413
+test confusion matrix is [[943175     23]
+ [ 47504      8]]
+train confusion matrix is [[3017669      70]
+ [ 152497      33]]
+test AUC score is 0.5000719966955497
+train AUC score is 0.5000965773537197
+
+Balanced
+Accuracy_test is 0.9095921107084818
+Accuracy_train is 0.909331984131315
+spec_test is 0.9943432808507779
+spec_train is 0.9942202433036821
+sens_test is 0.33483096644463994
+sens_train is 0.33468368452267167
+test accuracy score is 0.9095921107084818
+train accuracy score is 0.909331984131315
+test confusion matrix is [[858514  84684]
+ [  4884  42628]]
+train confusion matrix is [[2746262  271477]
+ [  15965  136565]]
+test AUC score is 0.9037105056292168
+train AUC score is 0.9026858341601091
+
+

@@ -30,4 +30,5 @@ RM_RF_PICKLE = PICKLES_DIR + 'year_to_Rf-Rm.pickle'
 SMB_PICKLE = PICKLES_DIR + 'year_to_smb.pickle'
 HML_PICKLE = PICKLES_DIR + 'year_to_hml.pickle'
 STATE_GDP = PICKLES_DIR + 'state_to_gdp.pickle'
+COINCIDENT_EA = PICKLES_DIR + 'state_to_cea.pickle'
 

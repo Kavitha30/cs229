@@ -10,7 +10,7 @@ def generate(years):
     :return: dictionary with the key:value pair year : average CPI for that year
     '''
     print("Generating Cpi pickle")
-    df = pd.read_csv(c.DATA_DIR + 'cpi_data.csv')
+    df = pd.read_csv(c.DATA_DIR + 'supplementary_data/cpi_data.csv')
 
     # Get the year of each reported observation (reported monthly, like 1/31/1990)
     df['FiscalYear'] = pd.to_datetime(df['Date'], format='%Y/%m/%d')
