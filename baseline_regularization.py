@@ -16,7 +16,7 @@ print('hio')
 #logistic regression
 #lr = LogisticRegression(penalty = 'none', solver ='saga', class_weight= 'balanced')
 print('Logistic Regression')
-lr = LogisticRegression(penalty = 'none', solver ='saga', class_weight='balanced')
+lr = LogisticRegression(penalty = 'elasticnet', solver ='saga', class_weight='balanced')
 model = lr.fit(X_train, y_train)
 pred_train = model.predict(X_train)
 pred_test = model.predict(X_test)
