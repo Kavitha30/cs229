@@ -16,7 +16,7 @@ def run():
 
     #svm
     print('SVM')
-    model = svm.LinearSVC(class_weight='balanced')
+    model = svm.LinearSVC()
     feature_map = Nystroem(gamma=.2, random_state=1, n_components=300)
     train_transformed = feature_map.fit_transform(X_train)
     test_transformed = feature_map.transform(X_test)

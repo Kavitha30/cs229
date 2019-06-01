@@ -12,3 +12,21 @@ train confusion matrix is [[3017739       0]
  [ 152515      15]]
 test AUC score is 0.5
 train AUC score is 0.5000491706549531
+
+Normalized:
+
+SVM
+Accuracy_test is 0.30582
+Accuracy_train is 0.30693125
+spec_test is 0.9692719135465561
+spec_train is 0.9695558203707312
+sens_test is 0.054380352193278816
+sens_train is 0.05448808132559757
+test accuracy score is 0.30582
+train accuracy score is 0.30693125
+test confusion matrix is [[ 53277 137147]
+ [  1689   7887]]
+train confusion matrix is [[213980 547736]
+ [  6719  31565]]
+test AUC score is 0.5517012319270217
+train AUC score is 0.5527071102350667
