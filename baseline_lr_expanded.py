@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+import constants as c
 
 def run():
 
@@ -20,6 +21,14 @@ def run():
     model = lr.fit(X_train, y_train)
     pred_train = model.predict(X_train)
     pred_test = model.predict(X_test)
+
+    #print coefficients
+    print('Coefficients')
+    fieldList = np.array(list(X_train.columns.values)).reshape(-1, 1)
+    coeffs = np.reshape(model.coef_, (-1, 1))
+    coeffs = np.concatenate((fieldList, coeffs), axis=1)
+    with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+        print(pd.DataFrame(coeffs, columns=['Field', 'Coeff']))
 
     # Accuracy
     testlen = X_test.shape[0]
