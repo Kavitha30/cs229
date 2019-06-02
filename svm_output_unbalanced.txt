@@ -1,0 +1,15 @@
+hio
+Accuracy_test is 0.9520414652118178
+Accuracy_train is 0.951887678931977
+spec_test is 0.952045163888673
+spec_train is 0.9518930803127849
+sens_test is 0.42857142857142855
+sens_train is 0.5128205128205128
+test accuracy score is 0.9520414652118178
+train accuracy score is 0.951887678931977
+test confusion matrix is [[943194      4]
+ [ 47509      3]]
+train confusion matrix is [[3017720      19]
+ [ 152510      20]]
+test AUC score is 0.500029450525996
+train AUC score is 0.500062412821037
