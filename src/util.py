@@ -88,6 +88,7 @@ def load_raw_data():
 
     frame = pd.concat(li, axis=0, ignore_index=True, sort=False)
     frame.to_pickle(c.DATA_DIR + 'full_data.pkl')
+    return frame
 
 
 

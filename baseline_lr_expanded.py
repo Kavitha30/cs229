@@ -6,9 +6,9 @@ import constants as c
 
 def run():
 
-    X_train = pd.read_csv('x_train_exp.csv', sep=',')
+    X_train = pd.read_csv('x_train_exp.csv', sep=',', index_col=0)
     print(X_train.head())
-    X_test = pd.read_csv('x_test_exp.csv', sep=',')
+    X_test = pd.read_csv('x_test_exp.csv', sep=',', index_col=0)
     y_train = pd.read_csv('y_train_exp.csv', sep=',', header =None)
     y_train = np.ravel(y_train)
     y_test = pd.read_csv('y_test_exp.csv', sep=',', header= None)
@@ -17,14 +17,14 @@ def run():
 
     #logistic regression
     print('Logistic Regression')
-    lr = LogisticRegression(penalty = 'none', solver ='saga', class_weight='balanced')
-    model = lr.fit(X_train, y_train)
-    pred_train = model.predict(X_train)
-    pred_test = model.predict(X_test)
+    lr = LogisticRegression(penalty = 'l2', solver ='saga', class_weight='balanced')
+    model = lr.fit(X_train.drop(['out_prncp'], axis=1), y_train)
+    pred_train = model.predict(X_train.drop(['out_prncp'], axis=1))
+    pred_test = model.predict(X_test.drop(['out_prncp'], axis=1))
 
     #print coefficients
     print('Coefficients')
-    fieldList = np.array(list(X_train.columns.values)).reshape(-1, 1)
+    fieldList = np.array(list(X_train.drop(['out_prncp'], axis=1).columns.values)).reshape(-1, 1)
     coeffs = np.reshape(model.coef_, (-1, 1))
     coeffs = np.concatenate((fieldList, coeffs), axis=1)
     with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also

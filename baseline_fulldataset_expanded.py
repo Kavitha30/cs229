@@ -11,7 +11,8 @@ data= data[data.columns.difference(['last_pymnt_amnt'])]
 data= data[data.columns.difference(['last_pymnt_d'])]
 
 X = data[data.columns.difference(['loan_status'])]
-y = data['loan_status'].values
+y = int(data['loan_status'].values)
+print(y)
 
 #test/val/train split
 print('splitting...')
